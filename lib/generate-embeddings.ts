@@ -17,12 +17,6 @@ import { u } from 'unist-builder'
 import { filter } from 'unist-util-filter'
 import { inspect } from 'util'
 import yargs from 'yargs'
-import axios from 'axios';
-
-import cheerio from 'cheerio';
-import TurndownService from 'turndown';
-import * as fs from 'fs';
-import * as path from 'path';
 
 dotenv.config()
 
@@ -271,9 +265,6 @@ class MarkdownEmbeddingSource extends BaseEmbeddingSource {
 type EmbeddingSource = MarkdownEmbeddingSource
 
 async function generateEmbeddings() {
- 
-
-
   const argv = await yargs.option('refresh', {
     alias: 'r',
     description: 'Refresh data',

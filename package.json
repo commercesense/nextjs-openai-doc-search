@@ -22,7 +22,7 @@
     "sqlKeywordCase": "lower"
   },
   "dependencies": {
-    "@radix-ui/react-dialog": "^1.0.3",
+    "@radix-ui/react-dialog": "1.0.4",
     "@radix-ui/react-label": "^2.0.1",
     "@supabase/supabase-js": "^2.45.1",
     "@types/cheerio": "^0.22.35",
