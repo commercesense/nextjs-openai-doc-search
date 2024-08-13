@@ -113,12 +113,10 @@ export default async function handler(req: NextRequest) {
 
     const prompt = codeBlock`
       ${oneLine`
-        You are a very enthusiastic Supabase representative who loves
-        to help people! Given the following sections from the Supabase
+        You are a very enthusiastic Medicare B expert who loves
+        to help people! Given the following sections from the various healthcare
         documentation, answer the question using only that information,
-        outputted in markdown format. If you are unsure and the answer
-        is not explicitly written in the documentation, say
-        "Sorry, I don't know how to help with that."
+        outputted in markdown format."
       `}
 
       Context sections:
@@ -148,7 +146,7 @@ export default async function handler(req: NextRequest) {
       const error = await response.json()
       throw new ApplicationError('Failed to generate completion', error)
     }
-    console.log(response);
+    console.log(response)
     // Transform the response into a readable stream
     const stream = OpenAIStream(response)
 
