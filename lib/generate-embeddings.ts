@@ -331,12 +331,12 @@ async function generateEmbeddings() {
 
       // We use checksum to determine if this page & its sections need to be regenerated
       if (!shouldRefresh && existingPage?.checksum === checksum) {
-        const existingParentPage = existingPage?.parentPage as Singular<
+        const existingParentPage: unknown = existingPage?.parentPage as unknown as Singular<
           typeof existingPage.parentPage
         >
 
         // If parent page changed, update it
-        if (existingParentPage?.path !== parentPath) {
+        if ((existingParentPage as { path?: string })?.path !== parentPath) {
           console.log(`[${path}] Parent page has changed. Updating to '${parentPath}'...`)
           const { error: fetchParentPageError, data: parentPage } = await supabaseClient
             .from('nods_page')
