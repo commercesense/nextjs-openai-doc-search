@@ -336,7 +336,7 @@ async function generateEmbeddings() {
         >
 
         // If parent page changed, update it
-        if (existingParentPage?.path !== parentPath) {
+        if ((existingParentPage as { path?: string })?.path !== parentPath) {
           console.log(`[${path}] Parent page has changed. Updating to '${parentPath}'...`)
           const { error: fetchParentPageError, data: parentPage } = await supabaseClient
             .from('nods_page')
