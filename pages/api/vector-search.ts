@@ -65,7 +65,7 @@ export default async function handler(req: NextRequest) {
         categories: results.categories,
       })
     }
-
+     console.log("Sanitized Query " + sanitizedQuery.replaceAll('\n', ' '));
     // Create embedding from query
     const embeddingResponse = await openai.createEmbedding({
       model: 'text-embedding-3-small',
@@ -111,12 +111,13 @@ export default async function handler(req: NextRequest) {
       contextText += `${content.trim()}\n---\n`
     }
 
+    console.log("ContextText " + contextText);
+
     const prompt = codeBlock`
       ${oneLine`
         You are a very enthusiastic Medicare B expert who loves
         to help people! Given the following sections from the various healthcare
-        documentation, answer the question using only that information,
-        outputted in markdown format."
+        documentation, answer the question using only that information."
       `}
 
       Context sections:
@@ -146,6 +147,7 @@ export default async function handler(req: NextRequest) {
       const error = await response.json()
       throw new ApplicationError('Failed to generate completion', error)
     }
+    console.log("Next is the response")
     console.log(response)
     // Transform the response into a readable stream
     const stream = OpenAIStream(response)
