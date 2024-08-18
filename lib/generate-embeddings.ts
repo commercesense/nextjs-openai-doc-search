@@ -20,7 +20,7 @@ import yargs from 'yargs'
 
 dotenv.config()
 
-const ignoredFiles = ['pages/404.mdx']
+const ignoredFiles = ['pages/404.mdx', 'docs/cigna.mdx', 'docs/National-Association-of-Black-Accountants.mdx']
 
 /**
  * Extracts ES literals from an `estree` `ObjectExpression`
@@ -336,7 +336,7 @@ async function generateEmbeddings() {
         >
 
         // If parent page changed, update it
-        if ((existingParentPage as { path?: string })?.path !== parentPath) {
+        if (existingParentPage?.path !== parentPath) {
           console.log(`[${path}] Parent page has changed. Updating to '${parentPath}'...`)
           const { error: fetchParentPageError, data: parentPage } = await supabaseClient
             .from('nods_page')
