@@ -68,7 +68,7 @@ export default async function handler(req: NextRequest) {
 
     // Create embedding from query
     const embeddingResponse = await openai.createEmbedding({
-      model: 'text-embedding-3-large',
+      model: 'text-embedding-3-small',
       input: sanitizedQuery.replaceAll('\n', ' '),
     })
 
@@ -135,7 +135,7 @@ export default async function handler(req: NextRequest) {
     }
 
     const response = await openai.createChatCompletion({
-      model: 'gpt-4o-2024-08-06',
+      model: 'chatgpt-4o-latest',
       messages: [chatMessage],
       max_tokens: 2048,
       temperature: 0,
