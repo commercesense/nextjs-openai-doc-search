@@ -20,7 +20,7 @@ import yargs from 'yargs'
 
 dotenv.config()
 
-const ignoredFiles = ['pages/404.mdx', 'docs/cigna.mdx', 'docs/National-Association-of-Black-Accountants.mdx']
+const ignoredFiles = ['pages/404.mdx', 'docs/cigna.mdx', 'pages/docs/National-Association-of-Black-Accountants.mdx']
 
 /**
  * Extracts ES literals from an `estree` `ObjectExpression`

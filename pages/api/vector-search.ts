@@ -135,7 +135,7 @@ export default async function handler(req: NextRequest) {
     }
 
     const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo,
+      model: 'gpt-3.5-turbo',
       messages: [chatMessage],
       max_tokens: 2048,
       temperature: 0,
