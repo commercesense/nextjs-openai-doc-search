@@ -1,4 +1,49 @@
-import axios from 'axios'; 
+
+const axios = require('axios');
+const TurndownService = require('turndown');
+const cheerio = require('cheerio');
+const fs = require('fs');
+import * as path from 'path';
+
+async function convertHtmlToMarkdown(url:String, outputFilePath:String) {
+    try {
+        // Fetch HTML from the URL
+        const response = await axios.get(url);
+        var html = response.data;
+
+         // Load the HTML into cheerio for manipulation
+         const $ = cheerio.load(html);
+
+         // Remove all <style> and <script> tags and their contents
+         $('style, script').remove();
+
+         // Convert the cleaned HTML back to a string
+        html = $.html();
+
+        // Initialize Turndown service
+        const turndownService = new TurndownService();
+
+        // Convert HTML to Markdown
+        const markdown = turndownService.turndown(html);
+
+        // Write the markdown to a file
+        fs.writeFileSync(outputFilePath, markdown);
+
+        console.log(`Markdown saved to ${outputFilePath}`);
+    } catch (error) {
+        console.error('Error: ${error.message}');
+    }
+}
+
+// Example usage: Pass the URL and output file path as arguments
+const url = 'https://en.wikipedia.org/wiki/National_Association_of_Black_Accountants';
+const outputDir: string = './pages/docs/';
+const outputFilePath = outputDir + path.basename(url)+'.mdx';
+
+convertHtmlToMarkdown(url, outputFilePath);
+
+
+
 /* 
 import TurndownService from 'turndown';
 import * as fs from 'fs';
