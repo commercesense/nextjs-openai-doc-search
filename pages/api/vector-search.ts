@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { codeBlock, oneLine } from 'common-tags'
 import GPT3Tokenizer from 'gpt3-tokenizer'
+//import GPT4Tokenizer from 'gpt4-tokenizer';
 import {
   Configuration,
   OpenAIApi,
@@ -100,10 +101,14 @@ export default async function handler(req: NextRequest) {
 
     for (let i = 0; i < pageSections.length; i++) {
       const pageSection = pageSections[i]
+      console.log("pageSection");
+      console.log(pageSection);
+      
       const content = pageSection.content
       const encoded = tokenizer.encode(content)
       tokenCount += encoded.text.length
-
+      console.log("TokenCount");
+      console.log(tokenCount);
       if (tokenCount >= 1500) {
         break
       }
@@ -147,13 +152,16 @@ export default async function handler(req: NextRequest) {
       const error = await response.json()
       throw new ApplicationError('Failed to generate completion', error)
     }
-    console.log("Next is the response")
-    console.log(response)
+
     // Transform the response into a readable stream
     const stream = OpenAIStream(response)
 
     // Return a StreamingTextResponse, which can be consumed by the client
-    return new StreamingTextResponse(stream)
+    const stremTextResponse =  new StreamingTextResponse(stream)
+    console.log("What is stremTextResponse")
+    console.log(stremTextResponse)
+    return stremTextResponse
+
   } catch (err: unknown) {
     if (err instanceof UserError) {
       return new Response(

@@ -36,7 +36,7 @@ async function convertHtmlToMarkdown(url:String, outputFilePath:String) {
 }
 
 // Example usage: Pass the URL and output file path as arguments
-const url = 'https://www.fideliscare.org/Shop-For-A-Plan/Helpful-Tools/Insurance-Terms-Explained';
+const url = 'https://www.medicare.gov/coverage/oxygen-equipment-accessories';
 const outputDir: string = './pages/docs/';
 const outputFilePath = outputDir + path.basename(url)+'.mdx';
 
