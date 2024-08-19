@@ -85,9 +85,9 @@ export default async function handler(req: NextRequest) {
       'match_page_sections',
       {
         embedding,
-        match_threshold: 0.78,
+        match_threshold: 0.40,
         match_count: 10,
-        min_content_length: 50,
+        min_content_length: 30,
       }
     )
 
@@ -120,9 +120,11 @@ export default async function handler(req: NextRequest) {
 
     const prompt = codeBlock`
       ${oneLine`
-        You are a very enthusiastic Medicare B expert who loves
-        to help people! Given the following sections from the various healthcare
-        documentation, answer the question using only that information."
+        You are an AI Assistant who answers questions about sections.
+        
+        You are a chat bot, so keep your answers succient.
+        
+        You are only allowed to use the Context sections below to answer the question.
       `}
 
       Context sections:
@@ -132,7 +134,7 @@ export default async function handler(req: NextRequest) {
       ${sanitizedQuery}
       """
 
-      Answer as markdown (including related code snippets if available):
+      Answer as HTML (including related code snippets if available):
     `
 
     const chatMessage: ChatCompletionRequestMessage = {
