@@ -123,7 +123,7 @@ export default async function handler(req: NextRequest) {
 
     const prompt = codeBlock`
       ${oneLine`
-        You are an AI Assistant who answers questions about sections. You are a Medicare expert.
+        You are an AI Assistant who answers questions about sections. You are an expert in analyzing eligiblity for Medicare and Healthare programs.
         
         The current date is ${formattedDate}, and please use this date when calculating the elgibility age for Medicare.
         
