@@ -77,9 +77,9 @@ export function SearchDialog() {
       <Dialog open={open}>
         <DialogContent className="sm:max-w-[850px] max-h-[80vh] overflow-y-auto text-black">
           <DialogHeader>
-            <DialogTitle>OpenAI Powered Vector Search</DialogTitle>
+            <DialogTitle>Medicare B Eligbility Search</DialogTitle>
             <DialogDescription>
-              Custom built ChatGPT style search
+              Custom ChatGPT Style Search built by CommerceSense
             </DialogDescription>
             <hr />
             <button className="absolute top-0 right-2 p-2" onClick={() => setOpen(false)}>
@@ -148,9 +148,9 @@ export function SearchDialog() {
                   hover:bg-slate-100 dark:hover:bg-gray-600
                   rounded border border-slate-200 dark:border-slate-600
                   transition-colors"
-                  onClick={(_) => setQuery('What are embeddings?')}
+                  onClick={(_) => setQuery('What is Medicare B?')}
                 >
-                  What are embeddings?
+                  What is Medicare B?
                 </button>
               </div>
             </div>

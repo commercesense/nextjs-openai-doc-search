@@ -101,8 +101,8 @@ export default async function handler(req: NextRequest) {
 
     for (let i = 0; i < pageSections.length; i++) {
       const pageSection = pageSections[i]
-      console.log("pageSection");
-      console.log(pageSection);
+      //console.log("pageSection");
+      ///console.log(pageSection);
       
       const content = pageSection.content
       const encoded = tokenizer.encode(content)
@@ -116,11 +116,16 @@ export default async function handler(req: NextRequest) {
       contextText += `${content.trim()}\n---\n`
     }
 
-    console.log("ContextText " + contextText);
+    //console.log("ContextText " + contextText);
+
+    const today = new Date();
+    const formattedDate = `${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getDate().toString().padStart(2, '0')}/${today.getFullYear()}`;
 
     const prompt = codeBlock`
       ${oneLine`
-        You are an AI Assistant who answers questions about sections.
+        You are an AI Assistant who answers questions about sections. You are a Medicare expert.
+        
+        The current date is ${formattedDate}, and please use this date when calculating the elgibility age for Medicare.
         
         You are a chat bot, so keep your answers succient.
         
@@ -134,7 +139,7 @@ export default async function handler(req: NextRequest) {
       ${sanitizedQuery}
       """
 
-      Answer as HTML (including related code snippets if available):
+      Answer as Markdown:
     `
 
     const chatMessage: ChatCompletionRequestMessage = {
